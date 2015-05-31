@@ -1,0 +1,71 @@
+/*
+	NiceRange-HTML5 - 1.0
+	https://github.com/Mr21/nicerange-html5
+*/
+
+/* disable the input the time of the initialisation */
+input.nicerange {
+	display: none;
+	}
+
+/* container */
+.nicerange {
+	display: inline-block;
+	position: relative;
+	font-size: 10px;
+	vertical-align: middle;
+	line-height: 1em;
+	}
+	.nicerange > * {
+		vertical-align: middle;
+		}
+
+/* <input type="text" class="nb"/> */
+.nicerange .nb {
+	width: 4em;
+	padding: 0 0 0 .3em;
+	font-size: inherit;
+	line-height: 1.5em;
+	border: 0;
+	border-radius: 2px 0 0 2px;
+	color: #fff;
+	background: #555;
+	}
+	.nicerange .nb:focus {
+		color: #222;
+		background: #fff;
+		}
+
+/* <span class="btn"> */
+.nicerange .btn {
+	display: inline-block;
+	width: 1.8em;
+	background: #77f;
+	border-radius: 0 2px 2px 0;
+	line-height: 1.5em;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	}
+	.nicerange .btn:after {
+		display: block;
+		content: "\25BC";
+		font-size: 10px;
+		transform: scale(1, .65);
+		}
+
+/* <input type="range" class="rng"/> */
+.nicerange .rng {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	width: 100px;
+	margin: 4px 0 0 -50px;
+	transition: all .2s;
+	visibility: hidden;
+	opacity: 0;
+	}
+	.nicerange.open .rng {
+		visibility: visible;
+		opacity: 1;
+		}

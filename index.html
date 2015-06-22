@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="nicerange.css"/>
 	<script src="/_/header.js"></script>
 	<script src="/_/jquery.js"></script>
+	<script src="/jquery-element/jquery-element.js"></script>
 	<script src="nicerange.js"></script>
 	<style>
 		#demo {
@@ -64,33 +65,60 @@
 		</thead>
 		<tr>
 			<td>
-				<input class="test" type="range" min="0" value="50" max="100" step="5"/>
+				<input
+					type="range"
+					min="0"
+					max="100"
+					step="5"
+					value="50"
+				/>
 			</td><td>
-<pre>&lt;input type="range"
-       min="0" max="100"
-       step="5"
-       value="50"
-       /&gt;</pre>
+<pre>
+&lt;body&gt;
+	&lt;input
+		type="range"
+		min="0"
+		max="100"
+		step="5"
+		value="50"
+	/&gt;
+&lt;/body&gt;
+</pre>
 			</td>
 		</tr><tr>
 			<td>
-				<input class="nicerange" type="range" min="0" max="100" step="5" data-unit="%"/>
+				<div
+					class="nicerange"
+					data-jquery-element="nicerange"
+					data-min="0"
+					data-max="100"
+					data-step="5"
+					data-value="21"
+					data-unit="%"
+				></div>
 			</td><td>
 <pre>
-<b>&lt;link rel="stylesheet" href="nicerange.css"/&gt;</b>
-<b>&lt;script src="jquery.js"&gt;&lt;/script&gt;</b>
-<b>&lt;script src="nicerange.js"&gt;&lt;/script&gt;</b>
-&lt;input type="range"
-       min="0" max="100"
-       step="5"
-       value="50"
-       <b>class="nicerange"</b>
-       <b>data-unit="%"</b>
-       /&gt;</pre>
+&lt;head&gt;
+	&lt;script src="<b>jquery.js</b>"&gt;&lt;/script&gt;</b>
+	&lt;script src="<b>jquery-element.js</b>"&gt;&lt;/script&gt;</b>
+	&lt;script src="<b>nicerange.js</b>"&gt;&lt;/script&gt;</b>
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div
+		class="<b>nicerange</b>"
+		data-jquery-element="<b>nicerange</b>"
+		data-min="0"
+		data-max="100"
+		data-step="5"
+		data-value="21"
+		data-unit="%"
+	&gt;&lt;/div&gt;
+&lt;/body&gt;
+</pre>
 			</td>
 		</tr>
 		</table>
-	
+
 	</div>
 
 </body>

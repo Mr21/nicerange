@@ -1,79 +1,124 @@
 /*
-	NiceRange-HTML5 - 1.0
+	NiceRange-HTML5 - 1.0.0
 	https://github.com/Mr21/nicerange-html5
 */
 
-(function($) {
+jQuery.element({
+	name: "nicerange",
+	html:
+		'<input type="text" class="nb">'+
+		'<span class="btn"></span>'+
+		'<input class="rng" type="range">'
+	,
+	css: '\
+		input.nicerange {\
+			display: none;\
+			}\
+		.nicerange {\
+			display: inline-block;\
+			position: relative;\
+			font-size: 10px;\
+			vertical-align: middle;\
+			line-height: 1em;\
+		}\
+		.nicerange > * {\
+			vertical-align: middle;\
+		}\
+		.nicerange .nb {\
+			width: 4em;\
+			padding: 0 0 0 .3em;\
+			font-size: inherit;\
+			line-height: 1.5em;\
+			border: 0;\
+			border-radius: 2px 0 0 2px;\
+			color: #fff;\
+			background: #555;\
+		}\
+		.nicerange .nb:focus {\
+			color: #222;\
+			background: #fff;\
+		}\
+		.nicerange .btn {\
+			display: inline-block;\
+			width: 1.8em;\
+			background: #77f;\
+			border-radius: 0 2px 2px 0;\
+			line-height: 1.5em;\
+			text-align: center;\
+			color: #fff;\
+			cursor: pointer;\
+		}\
+		.nicerange .btn:after {\
+			display: block;\
+			content: "\\25BC";\
+			font-size: 10px;\
+			transform: scale(1, .65);\
+		}\
+		.nicerange .rng {\
+			position: absolute;\
+			top: 100%;\
+			left: 50%;\
+			width: 100px;\
+			margin: 4px 0 0 -50px;\
+			transition: all .2s;\
+			visibility: hidden;\
+			opacity: 0;\
+		}\
+		.nicerange.open .rng {\
+			visibility: visible;\
+			opacity: 1;\
+		}\
+	',
+	init: function() {
+		var
+			jqElement = this.jqElement,
+			elTxt,
+			elRng
+		;
 
-if (MutationObserver = MutationObserver || WebKitMutationObserver)
-	new MutationObserver(function(mutations) {
-		var i = 0, j, m, n;
-		for (; m = mutations[i]; ++i)
-			for (j = 0; n = m.addedNodes[j]; ++j)
-				if (n.tagName && n.tagName.toLowerCase() === "input" &&
-					n.type === "range" && n.classList.contains("nicerange"))
-					nicerange_init(0, n);
-	}).observe(document, {
-	  subtree: true,
-	  childList: true
-	});
+		function setVal() {
+			elTxt.value = elRng.value + (jqElement[0].dataset.unit || "");
+		}
 
-function nicerange_init(i, elRng) {
-	var jqCtn, elTxt;
+		jqElement
+			.children(".btn")
+				.click(function() {
+					var op = !jqElement.hasClass("open");
+					jqElement.toggleClass("open", op);
+					if (op) {
+						setTimeout(function() { elRng.focus(); }, 125);
+					}
+				})
+		;
 
-	function setVal() {
-		elTxt.value = elRng.value + elRng.dataset.unit;
+		elTxt =
+		jqElement
+			.children(".nb")
+				.click(function() {
+					this.select();
+				})
+				.change(function() {
+					elRng.value = elTxt.value;
+					setVal();
+					elTxt.blur();
+				})
+		[0];
+
+		elRng =
+		jqElement
+			.children(".rng")
+				.attr({
+					min:   jqElement.data("min"),
+					max:   jqElement.data("max"),
+					step:  jqElement.data("step"),
+					value: jqElement.data("value")
+				})
+				.on("change input", setVal)
+				.blur(function() {
+					jqElement.removeClass("open");
+				})
+		[0];
+
+		setVal();
 	}
-
-	jqCtn =
-	$("<div>")
-		.attr("class", elRng.className)
-		.insertBefore(elRng)
-		.append(elRng)
-	;
-
-	$("<span>")
-		.addClass("btn")
-		.prependTo(jqCtn)
-		.click(function() {
-			var op = !jqCtn.hasClass("open");
-			jqCtn.toggleClass("open", op);
-			if (op)
-				setTimeout(function() { elRng.focus(); }, 100);
-		})
-	;
-
-	elTxt =
-	$("<input type='text'/>")
-		.addClass("nb")
-		.prependTo(jqCtn)
-		.change(function() {
-			elRng.value = elTxt.value;
-			setVal();
-			elTxt.blur();
-		})
-	[0];
-
-	if (elRng.dataset.unit === undefined)
-		elRng.dataset.unit = "";
-
-	$(elRng)
-		.attr("class", "rng")
-		.on("change input", setVal)
-		.blur(function() {
-			jqCtn.removeClass("open");
-		})
-	;
-
-	setVal();
-}
-
-$.fn.nicerange = function() {
-	$.each(this, nicerange_init);
-};
-
-$(function() {
-	$(".nicerange").nicerange();
 });
-
-})(jQuery);

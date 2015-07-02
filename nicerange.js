@@ -1,5 +1,5 @@
 /*
-	NiceRange-HTML5 - 1.0.0
+	NiceRange-HTML5 - 1.1.0
 	https://github.com/Mr21/nicerange-html5
 */
 
@@ -8,7 +8,9 @@ jQuery.element({
 	html:
 		'<input type="text" class="nb">'+
 		'<span class="btn"></span>'+
-		'<input class="rng" type="range">'
+		'<span class="rngContainer">'+
+			'<input class="rng" type="range">'+
+		'</span>'
 	,
 	css: '\
 		input.nicerange {\
@@ -54,19 +56,30 @@ jQuery.element({
 			font-size: 10px;\
 			transform: scale(1, .65);\
 		}\
-		.nicerange .rng {\
+		.nicerange .rngContainer {\
+			box-sizing: border-box;\
 			position: absolute;\
+			z-index: 2147483647;\
 			top: 100%;\
 			left: 50%;\
-			width: 100px;\
 			margin: 4px 0 0 -50px;\
+			width: 100px;\
+			padding: 4px 8px;\
+			line-height: 0;\
+			background: #555;\
+			border-radius: 3px;\
 			transition: all .2s;\
 			visibility: hidden;\
 			opacity: 0;\
 		}\
-		.nicerange.open .rng {\
+		.nicerange.open .rngContainer {\
 			visibility: visible;\
 			opacity: 1;\
+		}\
+		.nicerange .rng {\
+			width: 100%;\
+			margin: 0;\
+			outline: 0;\
 		}\
 	',
 	init: function() {
@@ -106,7 +119,7 @@ jQuery.element({
 
 		elRng =
 		jqElement
-			.children(".rng")
+			.find(".rng")
 				.attr({
 					min:   jqElement.data("min"),
 					max:   jqElement.data("max"),

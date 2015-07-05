@@ -20,6 +20,7 @@ jQuery.element({
 			display: inline-block;\
 			position: relative;\
 			font-size: 10px;\
+			line-height: 1;\
 			vertical-align: middle;\
 			border-radius: 2px;\
 			margin: .2em 0;\

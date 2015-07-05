@@ -1,5 +1,5 @@
 /*
-	NiceRange-HTML5 - 1.1.0
+	NiceRange-HTML5 - 1.1.1
 	https://github.com/Mr21/nicerange-html5
 */
 
@@ -21,7 +21,9 @@ jQuery.element({
 			position: relative;\
 			font-size: 10px;\
 			vertical-align: middle;\
-			line-height: 1em;\
+			border-radius: 2px;\
+			margin: .2em 0;\
+			background: #555;\
 		}\
 		.nicerange > * {\
 			vertical-align: middle;\
@@ -34,7 +36,7 @@ jQuery.element({
 			border: 0;\
 			border-radius: 2px 0 0 2px;\
 			color: #fff;\
-			background: #555;\
+			background: inherit;\
 		}\
 		.nicerange .nb:focus {\
 			color: #222;\
@@ -66,7 +68,7 @@ jQuery.element({
 			width: 100px;\
 			padding: 4px 8px;\
 			line-height: 0;\
-			background: #555;\
+			background: inherit;\
 			border-radius: 3px;\
 			transition: all .2s;\
 			visibility: hidden;\

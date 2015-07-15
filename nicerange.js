@@ -1,16 +1,18 @@
 /*
-	NiceRange-HTML5 - 1.1.1
+	NiceRange-HTML5 - 2.0.0
 	https://github.com/Mr21/nicerange-html5
 */
 
 jQuery.element({
 	name: "nicerange",
-	html:
-		'<input type="text" class="nb">'+
-		'<span class="btn"></span>'+
-		'<span class="rngContainer">'+
-			'<input class="rng" type="range">'+
-		'</span>'
+	htmlReplace:
+		'<div class="nicerange">'+
+			'<input type="text" class="nb">'+
+			'<span class="btn"></span>'+
+			'<span class="rngContainer">'+
+				'{{html}}'+
+			'</span>'+
+		'</div>'
 	,
 	css: '\
 		input.nicerange {\
@@ -79,7 +81,7 @@ jQuery.element({
 			visibility: visible;\
 			opacity: 1;\
 		}\
-		.nicerange .rng {\
+		.nicerange [type="range"] {\
 			width: 100%;\
 			margin: 0;\
 			outline: 0;\
@@ -93,7 +95,7 @@ jQuery.element({
 		;
 
 		function setVal() {
-			elTxt.value = elRng.value + (jqElement[0].dataset.unit || "");
+			elTxt.value = elRng.value + (elRng.dataset.unit || "");
 		}
 
 		jqElement
@@ -122,13 +124,7 @@ jQuery.element({
 
 		elRng =
 		jqElement
-			.find(".rng")
-				.attr({
-					min:   jqElement.data("min"),
-					max:   jqElement.data("max"),
-					step:  jqElement.data("step"),
-					value: jqElement.data("value")
-				})
+			.find("input[type='range']")
 				.on("change input", setVal)
 				.blur(function() {
 					jqElement.removeClass("open");

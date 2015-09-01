@@ -3,7 +3,7 @@
 	https://github.com/Mr21/nicerange-html5
 */
 
-jQuery.element({
+jQuery.element( {
 	name: "nicerange",
 	htmlReplace:
 		'<div class="nicerange">'+
@@ -96,42 +96,42 @@ jQuery.element({
 		;
 
 		function setVal() {
-			elTxt.value = elRng.value + (elRng.dataset.unit || "");
+			elTxt.value = elRng.value + ( elRng.dataset.unit || "" );
 		}
 
 		jqElement
-			.children(".btn")
-				.click(function() {
-					var op = !jqElement.hasClass("open");
-					jqElement.toggleClass("open", op);
-					if (op) {
-						setTimeout(function() { elRng.focus(); }, 125);
+			.children( ".btn" )
+				.click( function() {
+					var op = !jqElement.hasClass( "open" );
+					jqElement.toggleClass( "open", op );
+					if ( op ) {
+						setTimeout( function() { elRng.focus(); }, 125 );
 					}
 				})
 		;
 
 		elTxt =
 		jqElement
-			.children(".nb")
-				.click(function() {
+			.children( ".nb" )
+				.click( function() {
 					this.select();
 				})
-				.change(function() {
+				.change( function() {
 					elRng.value = elTxt.value;
 					jqRng.change();
 					elTxt.blur();
 				})
-		[0];
+		[ 0 ];
 
 		jqRng =
 		jqElement
-			.find("input[type='range']")
-				.on("change input", setVal)
-				.blur(function() {
-					jqElement.removeClass("open");
+			.find( "input[type='range']" )
+				.on( "change input", setVal )
+				.blur( function() {
+					jqElement.removeClass( "open" );
 				})
 		;
-		elRng = jqRng[0];
+		elRng = jqRng[ 0 ];
 
 		setVal();
 	}

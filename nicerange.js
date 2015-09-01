@@ -1,5 +1,5 @@
 /*
-	NiceRange-HTML5 - 2.0.0
+	NiceRange-HTML5 - 2.1.0
 	https://github.com/Mr21/nicerange-html5
 */
 
@@ -91,6 +91,7 @@ jQuery.element({
 		var
 			jqElement = this.jqElement,
 			elTxt,
+			jqRng,
 			elRng
 		;
 
@@ -117,19 +118,20 @@ jQuery.element({
 				})
 				.change(function() {
 					elRng.value = elTxt.value;
-					setVal();
+					jqRng.change();
 					elTxt.blur();
 				})
 		[0];
 
-		elRng =
+		jqRng =
 		jqElement
 			.find("input[type='range']")
 				.on("change input", setVal)
 				.blur(function() {
 					jqElement.removeClass("open");
 				})
-		[0];
+		;
+		elRng = jqRng[0];
 
 		setVal();
 	}
